@@ -1,2 +1,3 @@
 # udacity-machine_learning-titanic_survival_exploration
-To begin working with the RMS Titanic passenger data
+
+- [titanic_survival_exploration](./titanic_survival_exploration)
