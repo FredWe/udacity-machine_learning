@@ -11899,6 +11899,19 @@ div#notebook {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notes</p>
+<ul>
+<li><code>numpy.std()</code>算的是样本标准差，是极大似然估计。分母是<code>n</code>。(<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html">文档</a>)</li>
+<li><code>pandas.DataFrame.std()</code>算的是对总体标准差的无偏估计。分母是<code>n - 1</code>(<a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.std.html?highlight=std#pandas.DataFrame.std">文档</a>)</li>
+</ul>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
@@ -12038,7 +12051,7 @@ Standard deviation of prices: $165,171.13
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="&#38382;&#39064;-2---&#22238;&#31572;:">&#38382;&#39064; 2 - &#22238;&#31572;:<a class="anchor-link" href="#&#38382;&#39064;-2---&#22238;&#31572;:">&#182;</a></h3><ul>
 <li>将数据分出测试集可以帮助我们衡量模型的泛化能力。真实世界中的数据不可能全部包含在训练集中，所以一定要用<strong>独立同分布</strong>的另外一组数据来单独的衡量模型。</li>
-<li>测试机可以防止过拟合。如果训练集表现好，测试集表现不好，那么就有可能发生了过拟合。</li>
+<li><del>测试集可以防止过拟合。</del> 测试集是提前预留出来反映最终结果的。防止过拟合是验证集的作用。如果训练集表现好，测试集表现不好，那么就有可能发生了过拟合。</li>
 </ul>
 <p>如果用模型已经见过的数据，当然效果非常好，但是这并测不出来模型在真实世界中的表现。</p>
 <p>如果没有数据来对模型进行测试，那么无法测量模型是否适应新的数据。有可能过拟合。</p>
@@ -13290,6 +13303,19 @@ AABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Notes</p>
+<ul>
+<li>这里随着数据的增多，模型提升的幅度也越来越小。传统的机器学习算法（又被称为基于统计的机器学习）在数据量达到一定程度后，更多的数据无法提升模型的表现。深度学习的一个优势就是它可以把大量的数据利用起来，提升学习表现。
+<img src="https://udacity-reviews-uploads.s3.amazonaws.com/_attachments/3230/1498724415/ml_curve.png" alt="ml_curve.png" style="width: 300px;"/></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="&#22797;&#26434;&#24230;&#26354;&#32447;">&#22797;&#26434;&#24230;&#26354;&#32447;<a class="anchor-link" href="#&#22797;&#26434;&#24230;&#26354;&#32447;">&#182;</a></h3><p>下列代码内的区域会输出一幅图像，它展示了一个已经经过训练和验证的决策树模型在不同最大深度条件下的表现。这个图形将包含两条曲线，一个是训练集的变化，一个是验证集的变化。跟<strong>学习曲线</strong>相似，阴影区域代表该曲线的不确定性，模型训练和测试部分的评分都用的 <code>performance_metric</code> 函数。</p>
 <p>运行下方区域中的代码，并利用输出的图形并回答下面的两个问题。</p>
 
@@ -13864,7 +13890,7 @@ jDFBxRKfMcaYoPL/Jyzd80zMowYAAAAASUVORK5CYII=
 <span class="err">}</span>
 </pre></div>
 </li>
-<li>由于超参数有可能影响模型的方差，所以当取定一组超参数之后，有可能验证集得分上下浮动很大，没法准确的反应模型的效果。就是说比如有两组超参数，可能第一组的验证集得分期望很大，但是浮动到比较小，第二组期望比较小，但是浮动到比较大。那么这就会对超参数选择产生错误的影响。交叉验证通过随机分k份，做k次，取验证集得分均值的方式，牺牲了少量验证集大小，换取验证集得分更稳定。更有可能准确判断超参数好坏。</li>
+<li>由于超参数有可能影响模型的方差，所以当取定一组超参数之后，有可能验证集得分上下浮动很大，没法准确的反应模型的效果。就是说比如有两组超参数，可能第一组的验证集得分期望很大，但是浮动到一个比较小的得分，第二组期望比较小，但是浮动到一个比较大的得分。那么这就会对超参数选择产生错误的影响。交叉验证通过随机分k份，做k次，取验证集得分均值的方式，牺牲了少量验证集大小，换取验证集得分更稳定。更有可能准确判断超参数好坏。</li>
 </ul>
 
 </div>
@@ -14461,7 +14487,7 @@ Range in prices: $72,588.89
 <ul>
 <li>仅仅凭房屋所在社区的环境来判断房屋价值并不合理。</li>
 </ul>
-<p>房屋的价值反映了当时房屋的供求关系，主要受需求影响。如上所述，房屋的价值至少还要和它本身的属性相关。甚至和当时的经济状况，人口组成（影响了客户的购房意愿）有关。</p>
+<p>房屋的价值反映了当时房屋的供求关系，主要受需求影响。如上所述，房屋的价值至少还要和它本身的属性相关，比如房屋的地理位置。甚至和当时的经济状况，人口组成（影响了客户的购房意愿）有关。</p>
 
 </div>
 </div>
